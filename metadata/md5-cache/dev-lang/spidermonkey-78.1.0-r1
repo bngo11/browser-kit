@@ -1,0 +1,15 @@
+BDEPEND=>=app-portage/elt-patches-20170815 !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) ~sys-devel/autoconf-2.13 >=sys-devel/libtool-2.4
+DEFINED_PHASES=compile configure install prepare test
+DEPEND=>=dev-libs/nspr-4.24 virtual/libffi sys-devel/clang sys-devel/llvm virtual/rust virtual/cargo sys-libs/readline:0= >=sys-libs/zlib-1.2.3:= system-icu? ( >=dev-libs/icu-67.1:= )
+DESCRIPTION=Stand-alone JavaScript C++ library
+EAPI=7
+HOMEPAGE=https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey
+IUSE=debug +jit minimal +system-icu test
+KEYWORDS=*
+LICENSE=MPLv2.0 MPLv1.1 GPLv2+ GPLv3+ LGPLv2+ AFL ASL 2.0
+RDEPEND=>=dev-libs/nspr-4.24 virtual/libffi sys-devel/clang sys-devel/llvm virtual/rust virtual/cargo sys-libs/readline:0= >=sys-libs/zlib-1.2.3:= system-icu? ( >=dev-libs/icu-67.1:= )
+RESTRICT=!test? ( test ) ia64? ( test )
+SLOT=78
+SRC_URI=https://ftp.mozilla.org/pub/firefox/releases/78.1.0esr/source/firefox-78.1.0esr.source.tar.xz
+_eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	pax-utils	db85a3c508cf82c45f24b2723791cc93	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_md5_=664a49c5fbdeabd5ca0e9ec13caeb7e8
