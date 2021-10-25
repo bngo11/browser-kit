@@ -55,7 +55,7 @@ iovec-0.1.4
 itoa-0.4.8
 kernel32-sys-0.2.2
 lazy_static-1.4.0
-libc-0.2.104
+libc-0.2.105
 line-wrap-0.1.1
 linked-hash-map-0.5.4
 log-0.4.14
@@ -86,7 +86,7 @@ pin-project-lite-0.2.7
 pin-utils-0.1.0
 plist-0.5.5
 podio-0.1.7
-ppv-lite86-0.2.14
+ppv-lite86-0.2.15
 proc-macro2-1.0.30
 quote-1.0.10
 rand-0.8.4
