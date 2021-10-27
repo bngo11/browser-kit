@@ -87,7 +87,7 @@ pin-utils-0.1.0
 plist-0.5.5
 podio-0.1.7
 ppv-lite86-0.2.15
-proc-macro2-1.0.30
+proc-macro2-1.0.32
 quote-1.0.10
 rand-0.8.4
 rand_chacha-0.3.1
@@ -115,7 +115,7 @@ sha-1-0.9.8
 slab-0.4.5
 socket2-0.3.19
 strsim-0.8.0
-syn-1.0.80
+syn-1.0.81
 tempfile-3.2.0
 term_size-0.3.2
 textwrap-0.11.0
