@@ -20,7 +20,7 @@ chrono-0.4.19
 clap-2.33.3
 cookie-0.12.0
 cpufeatures-0.2.1
-crc32fast-1.2.1
+crc32fast-1.2.2
 digest-0.9.0
 dirs-2.0.2
 dirs-sys-0.3.6
@@ -30,13 +30,13 @@ fnv-1.0.7
 form_urlencoded-1.0.1
 fuchsia-zircon-0.3.3
 fuchsia-zircon-sys-0.3.3
-futures-0.3.17
-futures-channel-0.3.17
-futures-core-0.3.17
-futures-io-0.3.17
-futures-sink-0.3.17
-futures-task-0.3.17
-futures-util-0.3.17
+futures-0.3.18
+futures-channel-0.3.18
+futures-core-0.3.18
+futures-io-0.3.18
+futures-sink-0.3.18
+futures-task-0.3.18
+futures-util-0.3.18
 generic-array-0.14.4
 getrandom-0.2.3
 h2-0.2.7
@@ -47,7 +47,7 @@ http-0.2.5
 http-body-0.3.1
 httparse-1.5.1
 httpdate-0.3.2
-httpdate-1.0.1
+httpdate-1.0.2
 hyper-0.13.10
 idna-0.2.3
 indexmap-1.7.0
@@ -55,7 +55,7 @@ iovec-0.1.4
 itoa-0.4.8
 kernel32-sys-0.2.2
 lazy_static-1.4.0
-libc-0.2.107
+libc-0.2.108
 line-wrap-0.1.1
 linked-hash-map-0.5.4
 log-0.4.14
@@ -99,7 +99,7 @@ regex-1.5.4
 regex-syntax-0.6.25
 remove_dir_all-0.5.3
 rust-ini-0.10.3
-ryu-1.0.5
+ryu-1.0.6
 safemem-0.3.3
 same-file-1.0.6
 scoped-tls-1.0.0
@@ -107,7 +107,7 @@ semver-0.9.0
 semver-parser-0.7.0
 serde-1.0.130
 serde_derive-1.0.130
-serde_json-1.0.69
+serde_json-1.0.72
 serde_repr-0.1.7
 serde_urlencoded-0.6.1
 serde_yaml-0.8.21
@@ -115,7 +115,7 @@ sha-1-0.9.8
 slab-0.4.5
 socket2-0.3.19
 strsim-0.8.0
-syn-1.0.81
+syn-1.0.82
 tempfile-3.2.0
 term_size-0.3.2
 textwrap-0.11.0
