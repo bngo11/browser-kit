@@ -30,13 +30,13 @@ fnv-1.0.7
 form_urlencoded-1.0.1
 fuchsia-zircon-0.3.3
 fuchsia-zircon-sys-0.3.3
-futures-0.3.18
+futures-0.3.17
 futures-channel-0.3.18
 futures-core-0.3.18
 futures-io-0.3.18
 futures-sink-0.3.18
 futures-task-0.3.18
-futures-util-0.3.18
+futures-util-0.3.17
 generic-array-0.14.4
 getrandom-0.2.3
 h2-0.2.7
@@ -53,9 +53,10 @@ idna-0.2.3
 indexmap-1.7.0
 iovec-0.1.4
 itoa-0.4.8
+itoa-1.0.1
 kernel32-sys-0.2.2
 lazy_static-1.4.0
-libc-0.2.109
+libc-0.2.112
 line-wrap-0.1.1
 linked-hash-map-0.5.4
 log-0.4.14
@@ -74,7 +75,7 @@ msdos_time-0.1.6
 net2-0.2.37
 num-integer-0.1.44
 num-traits-0.2.14
-once_cell-1.8.0
+once_cell-1.9.0
 opaque-debug-0.3.0
 percent-encoding-2.1.0
 pin-project-0.4.28
@@ -87,7 +88,7 @@ pin-utils-0.1.0
 plist-0.5.5
 podio-0.1.7
 ppv-lite86-0.2.15
-proc-macro2-1.0.33
+proc-macro2-1.0.34
 quote-1.0.10
 rand-0.8.4
 rand_chacha-0.3.1
@@ -99,7 +100,7 @@ regex-1.5.4
 regex-syntax-0.6.25
 remove_dir_all-0.5.3
 rust-ini-0.10.3
-ryu-1.0.6
+ryu-1.0.9
 safemem-0.3.3
 same-file-1.0.6
 scoped-tls-1.0.0
@@ -107,10 +108,10 @@ semver-0.9.0
 semver-parser-0.7.0
 serde-1.0.131
 serde_derive-1.0.131
-serde_json-1.0.72
+serde_json-1.0.73
 serde_repr-0.1.7
 serde_urlencoded-0.6.1
-serde_yaml-0.8.21
+serde_yaml-0.8.23
 sha-1-0.9.8
 slab-0.4.5
 socket2-0.3.19
