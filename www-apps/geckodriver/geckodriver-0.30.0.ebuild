@@ -58,7 +58,7 @@ itoa-0.4.8
 itoa-1.0.1
 kernel32-sys-0.2.2
 lazy_static-1.4.0
-libc-0.2.113
+libc-0.2.114
 line-wrap-0.1.1
 linked-hash-map-0.5.4
 log-0.4.14
@@ -103,8 +103,8 @@ same-file-1.0.6
 scoped-tls-1.0.0
 semver-0.9.0
 semver-parser-0.7.0
-serde-1.0.135
-serde_derive-1.0.135
+serde-1.0.136
+serde_derive-1.0.136
 serde_json-1.0.78
 serde_repr-0.1.7
 serde_urlencoded-0.6.1
