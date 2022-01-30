@@ -42,7 +42,7 @@ generic-array-0.14.5
 getrandom-0.2.4
 h2-0.2.7
 hashbrown-0.11.2
-headers-0.3.5
+headers-0.3.6
 headers-core-0.2.0
 http-0.2.6
 http-body-0.3.1
@@ -58,7 +58,7 @@ itoa-0.4.8
 itoa-1.0.1
 kernel32-sys-0.2.2
 lazy_static-1.4.0
-libc-0.2.115
+libc-0.2.116
 line-wrap-0.1.1
 linked-hash-map-0.5.4
 log-0.4.14
