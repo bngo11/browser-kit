@@ -58,7 +58,7 @@ itoa-0.4.8
 itoa-1.0.1
 kernel32-sys-0.2.2
 lazy_static-1.4.0
-libc-0.2.116
+libc-0.2.117
 line-wrap-0.1.1
 linked-hash-map-0.5.4
 log-0.4.14
@@ -123,8 +123,8 @@ tinyvec_macros-0.1.0
 tokio-0.2.25
 tokio-util-0.3.1
 tower-service-0.3.1
-tracing-0.1.29
-tracing-core-0.1.21
+tracing-0.1.30
+tracing-core-0.1.22
 tracing-futures-0.2.5
 try-lock-0.2.3
 typenum-1.15.0
