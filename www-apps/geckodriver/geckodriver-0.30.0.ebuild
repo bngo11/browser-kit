@@ -21,8 +21,8 @@ clap-2.34.0
 cookie-0.12.0
 cpufeatures-0.2.1
 crc32fast-1.3.2
-crypto-common-0.1.2
-digest-0.10.2
+crypto-common-0.1.3
+digest-0.10.3
 dirs-2.0.2
 dirs-sys-0.3.6
 dtoa-0.4.8
@@ -40,7 +40,7 @@ futures-sink-0.3.21
 futures-task-0.3.21
 futures-util-0.3.21
 generic-array-0.14.5
-getrandom-0.2.4
+getrandom-0.2.5
 h2-0.2.7
 hashbrown-0.11.2
 headers-0.3.7
@@ -59,14 +59,14 @@ itoa-0.4.8
 itoa-1.0.1
 kernel32-sys-0.2.2
 lazy_static-1.4.0
-libc-0.2.117
+libc-0.2.119
 line-wrap-0.1.1
 linked-hash-map-0.5.4
 log-0.4.14
 matches-0.1.9
 memchr-2.4.1
 mime-0.3.16
-mime_guess-2.0.3
+mime_guess-2.0.4
 miniz_oxide-0.4.4
 mio-0.6.23
 miow-0.2.2
@@ -123,7 +123,7 @@ tinyvec_macros-0.1.0
 tokio-0.2.25
 tokio-util-0.3.1
 tower-service-0.3.1
-tracing-0.1.30
+tracing-0.1.31
 tracing-core-0.1.22
 tracing-futures-0.2.5
 try-lock-0.2.3
