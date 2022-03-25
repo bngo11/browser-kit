@@ -3,7 +3,7 @@
 EAPI=6
 MOZ_ESR=0
 
-MOZ_LANGS=( ach af an ar ast az be bg bn br bs ca ca-valencia cak cs cy da de dsb el en-CA en-GB en-US eo es-AR es-CL es-ES es-MX et eu fa ff fi fr fy-NL ga-IE gd gl gn gu-IN he hi-IN hr hsb hu hy-AM ia id is it ja ka kab kk km kn ko lij lt lv mk mr ms my nb-NO ne-NP nl nn-NO oc pa-IN pl pt-BR pt-PT rm ro ru sco si sk sl son sq sr sv-SE szl ta te th tl tr trs uk ur uz vi xh zh-CN zh-TW )
+MOZ_LANGS=(  )
 
 # Convert the ebuild version to the upstream mozilla version, used by mozlinguas
 MOZ_PV="${PV/_beta/b}" # Handle beta for SRC_URI
@@ -39,8 +39,8 @@ inherit mozlinguas-v2 nsplugins pax-utils xdg-utils eapi7-ver
 
 DESCRIPTION="Firefox Web Browser"
 SRC_URI="${SRC_URI}
-	amd64? ( https://archive.mozilla.org/pub/firefox/releases/98.0.2/linux-x86_64/en-US/firefox-98.0.2.tar.bz2 -> firefox-bin_x86_64-98.0.2.tar.bz2 )
-	x86? ( https://archive.mozilla.org/pub/firefox/releases/98.0.2/linux-i686/en-US/firefox-98.0.2.tar.bz2 -> firefox-bin_i686-98.0.2.tar.bz2 )"
+	amd64? ( https://archive.mozilla.org/pub/devedition/releases/99.0b8/linux-x86_64/en-US/firefox-99.0b8.tar.bz2 -> firefox-dev-bin_x86_64-99.0_beta8.tar.bz2 )
+	x86? ( https://archive.mozilla.org/pub/devedition/releases/99.0b8/linux-i686/en-US/firefox-99.0b8.tar.bz2 -> firefox-dev-bin_i686-99.0_beta8.tar.bz2 )"
 HOMEPAGE="https://www.mozilla.org/en-US/firefox/"
 RESTRICT="strip mirror"
 
@@ -109,7 +109,7 @@ src_unpack() {
 }
 
 src_install() {
-	declare MOZILLA_FIVE_HOME=/opt/firefox
+	declare MOZILLA_FIVE_HOME=/opt/firefox-dev
 
 	local size sizes icon_path icon name
 	sizes="16 32 48 128"
@@ -170,9 +170,9 @@ src_install() {
 	cat <<-EOF >"${ED}"usr/bin/${PN}
 	#!/bin/sh
 	unset LD_PRELOAD
-	LD_LIBRARY_PATH="${apulselib}/opt/firefox/" \\
+	LD_LIBRARY_PATH="${apulselib}/opt/firefox-dev/" \\
 	GTK_PATH=/usr/$(get_libdir)/gtk-3.0/ \\
-	exec /opt/firefox/${MOZ_PN} "\$@"
+	exec /opt/firefox-dev/${MOZ_PN} "\$@"
 	EOF
 	fperms 0755 /usr/bin/${PN}
 
