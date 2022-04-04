@@ -110,7 +110,7 @@ serde_repr-0.1.7
 serde_urlencoded-0.6.1
 serde_yaml-0.8.23
 sha-1-0.10.0
-slab-0.4.5
+slab-0.4.6
 socket2-0.3.19
 strsim-0.8.0
 syn-1.0.90
@@ -126,7 +126,7 @@ tokio-0.2.25
 tokio-util-0.3.1
 tower-service-0.3.1
 tracing-0.1.32
-tracing-core-0.1.23
+tracing-core-0.1.24
 tracing-futures-0.2.5
 try-lock-0.2.3
 typenum-1.15.0
