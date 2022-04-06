@@ -89,7 +89,7 @@ pin-project-lite-0.2.8
 pin-utils-0.1.0
 plist-0.5.5
 podio-0.1.7
-proc-macro2-1.0.36
+proc-macro2-1.0.37
 quote-1.0.17
 redox_syscall-0.2.13
 redox_users-0.4.3
