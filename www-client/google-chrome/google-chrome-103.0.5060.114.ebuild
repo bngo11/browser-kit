@@ -13,13 +13,13 @@ MY_P="${MY_PN}_${PV}-1"
 S=${WORKDIR}
 DESCRIPTION="The web browser from Google (stable channel)"
 HOMEPAGE="https://www.google.com/chrome"
-SRC_URI="https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_103.0.5060.53-1_amd64.deb"
+SRC_URI="https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_103.0.5060.114-1_amd64.deb"
 
 KEYWORDS="-* amd64"
 LICENSE="google-chrome"
 SLOT="0"
 IUSE="selinux"
-RESTRICT="bindist mirror strip"
+RESTRICT="bindist strip"
 
 DEPEND=""
 RDEPEND="
