@@ -14,16 +14,16 @@ MY_PN=${PN}-stable
 DESCRIPTION="A browser for our friends"
 HOMEPAGE="https://vivaldi.com/"
 SRC_URI="
-	amd64? ( https://repo.vivaldi.com/snapshot/deb/pool/main/vivaldi-snapshot_5.4.2753.21-1_amd64.deb -> vivaldi-snapshot_5.4.2753.21-1_amd64.deb )
-	arm64? ( https://repo.vivaldi.com/snapshot/deb/pool/main/vivaldi-snapshot_5.4.2753.21-1_arm64.deb -> vivaldi-snapshot_5.4.2753.21-1_arm64.deb )
-	armhf? ( https://repo.vivaldi.com/snapshot/deb/pool/main/vivaldi-snapshot_5.4.2753.21-1_armhf.deb -> vivaldi-snapshot_5.4.2753.21-1_armhf.deb )
+	amd64? ( https://downloads.vivaldi.com/stable/vivaldi-stable_5.4.2753.37-1_amd64.deb -> vivaldi-stable_5.4.2753.37-1_amd64.deb )
+	arm? ( https://downloads.vivaldi.com/stable/vivaldi-stable_5.4.2753.37-1_armhf.deb -> vivaldi-stable_5.4.2753.37-1_armhf.deb )
+	arm64? ( https://downloads.vivaldi.com/stable/vivaldi-stable_5.4.2753.37-1_arm64.deb -> vivaldi-stable_5.4.2753.37-1_arm64.deb )
 "
 
 IUSE="widevine"
 
 LICENSE="Vivaldi"
 SLOT="0"
-KEYWORDS="-* amd64 arm64 armhf"
+KEYWORDS="-* amd64 arm arm64"
 
 
 DEPEND="virtual/libiconv"
@@ -86,7 +86,7 @@ src_prepare() {
 		etc/ \
 		|| die
 
-	use widevine || (rm opt/vivaldi/WidevineCdm || die)
+	use widevine || (rm opt/${PN}/WidevineCdm || die)
 
 	local c d
 	for d in 16 22 24 32 48 64 128 256; do
