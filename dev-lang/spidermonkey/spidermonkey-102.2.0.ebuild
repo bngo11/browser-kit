@@ -3,13 +3,13 @@
 EAPI="7"
 
 # Patch version
-FIREFOX_PATCHSET="firefox-91esr-patches-05j.tar.xz"
-SPIDERMONKEY_PATCHSET="spidermonkey-91-patches-03j.tar.xz"
+FIREFOX_PATCHSET="firefox-102esr-patches-01j.tar.xz"
+SPIDERMONKEY_PATCHSET="spidermonkey-102-patches-03j.tar.xz"
 
-LLVM_MAX_SLOT=13
+LLVM_MAX_SLOT=14
 
-PYTHON_COMPAT=( python3+ )
-PYTHON_REQ_USE="ssl"
+PYTHON_COMPAT=( python3_8+ )
+PYTHON_REQ_USE="ssl,xml(+)"
 
 WANT_AUTOCONF="2.1"
 
@@ -50,8 +50,8 @@ if [[ ${PV} == *_rc* ]] ; then
 fi
 
 PATCH_URIS=(
-	https://dev.gentoo.org/~{juippis,polynomial-c,whissi}/mozilla/patchsets/${FIREFOX_PATCHSET}
-	https://dev.gentoo.org/~{juippis,polynomial-c,whissi}/mozilla/patchsets/${SPIDERMONKEY_PATCHSET}
+	https://dev.gentoo.org/~{juippis,whissi}/mozilla/patchsets/${FIREFOX_PATCHSET}
+	https://dev.gentoo.org/~{juippis,whissi}/mozilla/patchsets/${SPIDERMONKEY_PATCHSET}
 )
 
 SRC_URI="${MOZ_SRC_BASE_URI}/source/${MOZ_P}.source.tar.xz -> ${MOZ_P_DISTFILES}.source.tar.xz
@@ -62,7 +62,7 @@ HOMEPAGE="https://spidermonkey.dev https://firefox-source-docs.mozilla.org/js/in
 
 KEYWORDS="*"
 
-SLOT="91"
+SLOT="$(ver_cut 1)"
 LICENSE="MPL-2.0"
 IUSE="clang cpu_flags_arm_neon debug +jit lto test"
 
@@ -70,12 +70,19 @@ IUSE="clang cpu_flags_arm_neon debug +jit lto test"
 RESTRICT="!test? ( test )"
 
 BDEPEND="${PYTHON_DEPS}
-	>=virtual/rust-1.51.0
+	>=virtual/rust-1.59.0
 	virtual/pkgconfig
 	test? (
 		$(python_gen_any_dep 'dev-python/six[${PYTHON_USEDEP}]')
 	)
 	|| (
+		(
+			sys-devel/llvm:14
+			clang? (
+				sys-devel/clang:14
+				lto? ( =sys-devel/lld-14* )
+			)
+		)
 		(
 			sys-devel/llvm:13
 			clang? (
@@ -83,22 +90,8 @@ BDEPEND="${PYTHON_DEPS}
 				lto? ( =sys-devel/lld-13* )
 			)
 		)
-		(
-			sys-devel/llvm:12
-			clang? (
-				sys-devel/clang:12
-				lto? ( =sys-devel/lld-12* )
-			)
-		)
-		(
-			sys-devel/llvm:11
-			clang? (
-				sys-devel/clang:11
-				lto? ( =sys-devel/lld-11* )
-			)
-		)
 	)"
-DEPEND=">=dev-libs/icu-69.1:=
+DEPEND=">=dev-libs/icu-71.1:=
 	dev-libs/nspr
 	sys-libs/readline:0=
 	sys-libs/zlib"
@@ -131,15 +124,15 @@ llvm_check_deps() {
 
 python_check_deps() {
 	if use test ; then
-		has_version "dev-python/six[${PYTHON_USEDEP}]"
+		python_has_version "dev-python/six[${PYTHON_USEDEP}]"
 	fi
 }
 
 pkg_pretend() {
 	if use test ; then
-		CHECKREQS_DISK_BUILD="7600M"
+		CHECKREQS_DISK_BUILD="7000M"
 	else
-		CHECKREQS_DISK_BUILD="6400M"
+		CHECKREQS_DISK_BUILD="6000M"
 	fi
 
 	check-reqs_pkg_pretend
@@ -148,9 +141,9 @@ pkg_pretend() {
 pkg_setup() {
 	if [[ ${MERGE_TYPE} != binary ]] ; then
 		if use test ; then
-			CHECKREQS_DISK_BUILD="7600M"
+			CHECKREQS_DISK_BUILD="7000M"
 		else
-			CHECKREQS_DISK_BUILD="6400M"
+			CHECKREQS_DISK_BUILD="6000M"
 		fi
 
 		check-reqs_pkg_setup
@@ -172,6 +165,8 @@ pkg_setup() {
 				eerror "  - Manually switch rust version using 'eselect rust' to match used LLVM version"
 				eerror "  - Switch to dev-lang/rust[system-llvm] which will guarantee matching version"
 				eerror "  - Build ${CATEGORY}/${PN} without USE=lto"
+				eerror "  - Rebuild lld with llvm that was used to build rust (may need to rebuild the whole "
+				eerror "    llvm/clang/lld/rust chain depending on your @world updates)"
 				die "LLVM version used by Rust (${version_llvm_rust}) does not match with ld.lld version (${version_lld})!"
 			fi
 		fi
@@ -199,6 +194,7 @@ src_prepare() {
 
 	eapply "${WORKDIR}"/firefox-patches
 	eapply "${WORKDIR}"/spidermonkey-patches
+	eapply "${FILESDIR}"/spidermonkey-102-packed_simd-2.patch
 
 	default
 
@@ -237,6 +233,7 @@ src_configure() {
 		einfo "Enforcing the use of clang due to USE=clang ..."
 		have_switched_compiler=yes
 		AR=llvm-ar
+		AS=llvm-as
 		CC=${CHOST}-clang
 		CXX=${CHOST}-clang++
 		NM=llvm-nm
@@ -271,19 +268,23 @@ src_configure() {
 	local -a myeconfargs=(
 		--host="${CBUILD:-${CHOST}}"
 		--target="${CHOST}"
+
 		--disable-ctype
 		--disable-jemalloc
 		--disable-optimize
 		--disable-smoosh
 		--disable-strip
+
 		--enable-readline
 		--enable-release
 		--enable-shared-js
+
 		--with-intl-api
 		--with-system-icu
 		--with-system-nspr
 		--with-system-zlib
 		--with-toolchain-prefix="${CHOST}-"
+
 		$(use_enable debug)
 		$(use_enable jit)
 		$(use_enable test tests)
@@ -311,7 +312,7 @@ src_configure() {
 			myeconfargs+=( --enable-lto=cross )
 		else
 			myeconfargs+=( --enable-linker=bfd )
-			myeconfargs+=( --enable-lto )
+			myeconfargs+=( --enable-lto=full )
 		fi
 	fi
 
@@ -325,8 +326,9 @@ src_configure() {
 		fi
 	fi
 
-	export MACH_USE_SYSTEM_PYTHON=1
-	export PIP_NO_CACHE_DIR=off
+	# Use system's Python environment
+	export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE="none"
+	export PIP_NETWORK_INSTALL_RESTRICTED_VIRTUALENVS=mach
 
 	# Show flags we will use
 	einfo "Build CFLAGS:    ${CFLAGS}"
@@ -354,14 +356,7 @@ src_test() {
 		die "Smoke-test failed: did interpreter initialization fail?"
 	fi
 
-	cp "${FILESDIR}"/spidermonkey-91-known-test-failures.txt "${T}"/known_failures.list || die
-
-	if use x86 ; then
-		echo "non262/Date/timeclip.js" >> "${T}"/known_failures.list
-		echo "test262/built-ins/Number/prototype/toPrecision/return-values.js" >> "${T}"/known_failures.list
-		echo "test262/language/types/number/S8.5_A2.1.js" >> "${T}"/known_failures.list
-		echo "test262/language/types/number/S8.5_A2.2.js" >> "${T}"/known_failures.list
-	fi
+	cp "${FILESDIR}"/spidermonkey-${SLOT}-known-test-failures.txt "${T}"/known_failures.list || die
 
 	if [[ $(tc-endian) == "big" ]] ; then
 		echo "non262/extensions/clone-errors.js" >> "${T}"/known_failures.list
