@@ -8,7 +8,7 @@ SPIDERMONKEY_PATCHSET="spidermonkey-102-patches-03j.tar.xz"
 
 LLVM_MAX_SLOT=14
 
-PYTHON_COMPAT=( python3_8+ )
+PYTHON_COMPAT=( python3+ )
 PYTHON_REQ_USE="ssl,xml(+)"
 
 WANT_AUTOCONF="2.1"
@@ -280,7 +280,6 @@ src_configure() {
 		--enable-shared-js
 
 		--with-intl-api
-		--with-system-icu
 		--with-system-nspr
 		--with-system-zlib
 		--with-toolchain-prefix="${CHOST}-"
@@ -289,10 +288,6 @@ src_configure() {
 		$(use_enable jit)
 		$(use_enable test tests)
 	)
-
-	if ! use x86 && [[ ${CHOST} != armv*h* ]] ; then
-		myeconfargs+=( --enable-rust-simd )
-	fi
 
 	# Modifications to better support ARM, bug 717344
 	if use cpu_flags_arm_neon ; then
