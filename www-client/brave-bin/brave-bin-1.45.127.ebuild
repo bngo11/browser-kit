@@ -14,7 +14,7 @@ inherit chromium-2 xdg-utils desktop
 
 DESCRIPTION="Brave Web Browser"
 HOMEPAGE="https://brave.com"
-SRC_URI="https://github.com/brave/brave-browser/releases/download/v1.45.116/brave-browser-1.45.116-linux-amd64.zip -> brave-browser-1.45.116-linux-amd64.zip"
+SRC_URI="https://github.com/brave/brave-browser/releases/download/v1.45.127/brave-browser-1.45.127-linux-amd64.zip -> brave-browser-1.45.127-linux-amd64.zip"
 
 LICENSE="MPL-2.0"
 SLOT="0"
@@ -52,9 +52,7 @@ RDEPEND="
 	x11-libs/pango
 	x11-libs/cairo
 	dev-libs/gobject-introspection
-	dev-libs/atk
-	app-accessibility/at-spi2-core
-	app-accessibility/at-spi2-atk
+	>=app-accessibility/at-spi2-core-2.46
 	x11-libs/gtk+
 	x11-libs/gdk-pixbuf
 	virtual/libffi
