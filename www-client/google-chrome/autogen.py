@@ -20,8 +20,8 @@ async def generate(hub, **pkginfo):
 		},
 	}
 
-	json_data = await hub.pkgtools.fetch.get_page("https://omahaproxy.appspot.com/json")
-	json_dict = json.loads(json_data)
+	json_data = await hub.pkgtools.fetch.get_page("https://versionhistory.googleapis.com/v1/chrome/platforms/all/channels/all/versions/")
+	json_dict = json.loads(json_data)['versions']
 	basename = "google-chrome"
 	url = f"https://dl.google.com/linux/chrome/deb/pool/main/g/"
 
@@ -31,8 +31,7 @@ async def generate(hub, **pkginfo):
 		name = f"{basename}-{browser['appendix']}"
 		channel = browser['channel']
 
-		linux_os = list(filter(lambda x: x["os"] == "linux", json_dict))[0]
-		release = list(filter(lambda x: x["channel"] == channel, linux_os["versions"]))[0]
+		release = list(filter(lambda x: "linux" in x['name'] and channel in x['name'], json_dict))[0]
 
 		version = release["version"]
 		appendix = browser["appendix"]
