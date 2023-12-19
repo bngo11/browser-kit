@@ -11,7 +11,7 @@ LLVM_MAX_SLOT=14
 PYTHON_COMPAT=( python3+ )
 PYTHON_REQ_USE="ssl,xml(+)"
 
-WANT_AUTOCONF="2.1"
+WANT_AUTOCONF="latest"
 
 inherit autotools check-reqs flag-o-matic llvm multiprocessing prefix python-any-r1 toolchain-funcs
 
