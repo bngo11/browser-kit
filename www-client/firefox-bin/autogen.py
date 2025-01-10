@@ -65,14 +65,14 @@ async def generate(hub, **pkginfo):
 			'version': "LATEST_FIREFOX_VERSION",
 			'url_path': "firefox/releases",
 		},
-		'beta': {
-			'version': "LATEST_FIREFOX_RELEASED_DEVEL_VERSION",
-			'url_path': "firefox/releases",
-		},
-		'dev': {
-			'version': "FIREFOX_DEVEDITION",
-			'url_path': "devedition/releases",
-		},
+#		'beta': {
+#			'version': "LATEST_FIREFOX_RELEASED_DEVEL_VERSION",
+#			'url_path': "firefox/releases",
+#		},
+#		'dev': {
+#			'version': "FIREFOX_DEVEDITION",
+#			'url_path': "devedition/releases",
+#		},
 #		'nightly': {
 #			'version': "FIREFOX_NIGHTLY",
 #			'url_path': "firefox/nightly/latest-mozilla-central",
