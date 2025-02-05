@@ -2,7 +2,8 @@
 
 from bs4 import BeautifulSoup
 
-base_url = "https://archive.mozilla.org"
+# base_url = "https://archive.mozilla.org"
+base_url = "https://ftp.mozilla.org"
 
 async def get_lang_artifacts(hub, version, url_path, channel):
 	uri_path = url_path
@@ -32,9 +33,9 @@ async def get_lang_artifacts(hub, version, url_path, channel):
 def get_moz_url(version, url_path, arch, channel):
 	# The tarballs for nightlies are named differently
 	if "nightly" in channel:
-		return f"{base_url}/pub/{url_path}/firefox-{version}.en-US.linux-{arch}.tar.bz2"
+		return f"{base_url}/pub/{url_path}/firefox-{version}.en-US.linux-{arch}.tar.xz"
 
-	return f"{base_url}/pub/{url_path}/{version}/linux-{arch}/en-US/firefox-{version}.tar.bz2"
+	return f"{base_url}/pub/{url_path}/{version}/linux-{arch}/en-US/firefox-{version}.tar.xz"
 
 
 def get_artifacts(hub, name, version, url_path, channel):
@@ -49,7 +50,7 @@ def get_artifacts(hub, name, version, url_path, channel):
 		arch,
 		hub.pkgtools.ebuild.Artifact(
 			url=get_moz_url(version, url_path, moz[arch], channel),
-			final_name=f"{name}_{moz[arch]}-{version.replace('a','_alpha').replace('b','_beta')}.tar.bz2")
+			final_name=f"{name}_{moz[arch]}-{version.replace('a','_alpha').replace('b','_beta')}.tar.xz")
 	) for arch in moz]
 
 
