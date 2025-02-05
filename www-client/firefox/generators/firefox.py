@@ -8,7 +8,7 @@ GLOBAL_DEFAULTS = {}
 # from: kit-fixups/browser-kit/curated/www-client/firefox-bin/autogen.py
 
 from bs4 import BeautifulSoup
-base_url = "https://archive.mozilla.org"
+base_url = "https://ftp.mozilla.org"
 
 async def get_lang_artifacts(hub, version, url_path, channel):
 	uri_path = url_path

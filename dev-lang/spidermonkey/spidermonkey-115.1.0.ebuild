@@ -43,10 +43,10 @@ MOZ_P="${MOZ_PN}-${MOZ_PV}"
 MOZ_PV_DISTFILES="${MOZ_PV}${MOZ_PV_SUFFIX}"
 MOZ_P_DISTFILES="${MOZ_PN}-${MOZ_PV_DISTFILES}"
 
-MOZ_SRC_BASE_URI="https://archive.mozilla.org/pub/${MOZ_PN}/releases/${MOZ_PV}"
+MOZ_SRC_BASE_URI="https://ftp.mozilla.org/pub/${MOZ_PN}/releases/${MOZ_PV}"
 
 if [[ ${PV} == *_rc* ]] ; then
-	MOZ_SRC_BASE_URI="https://archive.mozilla.org/pub/${MOZ_PN}/candidates/${MOZ_PV}-candidates/build${PV##*_rc}"
+	MOZ_SRC_BASE_URI="https://ftp.mozilla.org/pub/${MOZ_PN}/candidates/${MOZ_PV}-candidates/build${PV##*_rc}"
 fi
 
 PATCH_URIS=(
