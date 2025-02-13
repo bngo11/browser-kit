@@ -8,8 +8,8 @@ MY_P="${P/_p/+git}"
 MY_PV="${PV/_p/+git}"
 
 S="${WORKDIR}/${MY_P}"
-DESCRIPTION="Debian's w3m: WWW browsable pager"
-HOMEPAGE="https://github.com/tats/w3m"
+DESCRIPTION=""
+HOMEPAGE="https://github.com//"
 SRC_URI="https://github.com/tats/w3m/tarball/c8223fed7cc631ad85d8e5665e509e7988bedbab -> w3m-0.5.3_p20230121-c8223fe.tar.gz"
 
 LICENSE="w3m"
@@ -42,7 +42,7 @@ DEPEND="${RDEPEND}
 
 post_src_unpack() {
 	if [ ! -d "${S}" ]; then
-		mv tats-w3m* "${S}" || die
+		mv -* "${S}" || die
 	fi
 }
 
