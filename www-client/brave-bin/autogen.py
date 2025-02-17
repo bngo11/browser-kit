@@ -1,59 +1,39 @@
 #!/usr/bin/env python3
 
 import json
-from datetime import timedelta
-from metatools.version import generic
-
-
-def find_release(json_dict, channel="Release"):
-	releases = filter(
-		lambda x: x["prerelease"] is False
-		and x["draft"] is False
-		and x["name"].startswith(channel)
-		and not "Android" in x["name"],
-		json_dict,
-	)
-	releases = list(releases)
-	if not len(releases):
-		return None
-	return sorted(releases, key=lambda x: generic.parse(x["tag_name"]))[-1]
-
 
 async def generate(hub, **pkginfo):
+	json_data = await hub.pkgtools.fetch.get_page("https://api.github.com/repos/brave/brave-browser/releases?per_page=100", is_json=True)
+	version = None
+	url = None
 
-	json_dict = await hub.pkgtools.fetch.get_page(
-		"https://api.github.com/repos/brave/brave-browser/releases?per_page=100", is_json=True, refresh_interval=timedelta(days=5)
-	)
+	for item in json_data:
+		try:
+			if item["prerelease"] or item["draft"] or not item["name"].startswith("Release"):
+				continue
 
-	# Try to use the latest release version, but fall back to latest nightly if none found:
-	release = None
-	dl_asset = None
-	for channel in ["Release", "Beta", "Dev", "Nightly"]:
-		r = find_release(json_dict, channel=channel)
-		if r:
-			dl_assets = list(
-				filter(
-					lambda x: x["browser_download_url"].endswith("-linux-amd64.zip")
-					or x["browser_download_url"].endswith("-linux-x64.zip"),
-					r["assets"],
-				)
-			)
-			if len(dl_assets):
-				release = r
-				dl_asset = dl_assets[0]
+			version = item["tag_name"].lstrip("v")
+			list(map(int, version.split(".")))
+
+			for asset in item["assets"]:
+				asset_name = asset["name"]
+
+				if asset_name.endswith("-linux-amd64.zip"):
+					url = asset["browser_download_url"]
+					break
+
+			if url:
 				break
 
-	if release is None or dl_asset is None:
-		raise hub.pkgtools.ebuild.BreezyError("Can't find a suitable release of Brave.")
+		except (KeyError, IndexError, ValueError):
+			continue
 
-	version = release["tag_name"][1:]  # strip leading 'v'
-
-	url = dl_asset["browser_download_url"]
-
-	ebuild = hub.pkgtools.ebuild.BreezyBuild(
-		**pkginfo, version=version, artifacts=[hub.pkgtools.ebuild.Artifact(url=url)]
-	)
-	ebuild.push()
-
+	if version and url:
+		ebuild = hub.pkgtools.ebuild.BreezyBuild(
+			**pkginfo,
+			version=version,
+			artifacts=[hub.pkgtools.ebuild.Artifact(url=url, final_name=asset_name)]
+		)
+		ebuild.push()
 
 # vim: ts=4 sw=4 noet
