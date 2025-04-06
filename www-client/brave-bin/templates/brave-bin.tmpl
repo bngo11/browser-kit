@@ -21,7 +21,7 @@ SLOT="0"
 KEYWORDS="*"
 IUSE="gnome-keyring"
 
-DEPEND="gnome-base/gconf:2"
+DEPEND=""
 RDEPEND="
 	${DEPEND}
 	dev-libs/libpthread-stubs
