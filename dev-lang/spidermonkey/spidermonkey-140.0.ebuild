@@ -3,10 +3,10 @@
 EAPI="7"
 
 # Patch version
-FIREFOX_PATCHSET="firefox-115esr-patches-04.tar.xz"
-SPIDERMONKEY_PATCHSET="spidermonkey-115-patches-01.tar.xz"
+FIREFOX_PATCHSET="firefox-140esr-patches-01.tar.xz"
+SPIDERMONKEY_PATCHSET="spidermonkey-140-patches-01.tar.xz"
 
-LLVM_MAX_SLOT=14
+LLVM_MAX_SLOT=18
 
 PYTHON_COMPAT=( python3+ )
 PYTHON_REQ_USE="ssl,xml(+)"
@@ -51,7 +51,7 @@ fi
 
 PATCH_URIS=(
 	https://dev.gentoo.org/~{juippis,whissi}/mozilla/patchsets/${FIREFOX_PATCHSET}
-	https://dev.gentoo.org/~{juippis,whissi}/mozilla/patchsets/${SPIDERMONKEY_PATCHSET}
+	# https://dev.gentoo.org/~{juippis,whissi}/mozilla/patchsets/${SPIDERMONKEY_PATCHSET}
 )
 
 SRC_URI="${MOZ_SRC_BASE_URI}/source/${MOZ_P}.source.tar.xz -> ${MOZ_P_DISTFILES}.source.tar.xz
@@ -72,6 +72,7 @@ RESTRICT="!test? ( test )"
 BDEPEND="${PYTHON_DEPS}
 	>=virtual/rust-1.59.0
 	virtual/pkgconfig
+	dev-util/cbindgen
 	test? (
 		$(python_gen_any_dep 'dev-python/six[${PYTHON_USEDEP}]')
 	)
@@ -84,10 +85,10 @@ BDEPEND="${PYTHON_DEPS}
 			)
 		)
 		(
-			sys-devel/llvm:13
+			sys-devel/llvm:18
 			clang? (
-				sys-devel/clang:13
-				lto? ( =sys-devel/lld-13* )
+				sys-devel/clang:18
+				lto? ( =sys-devel/lld-18* )
 			)
 		)
 	)"
@@ -187,13 +188,17 @@ pkg_setup() {
 	fi
 }
 
+PATCHES=(
+	"${FILESDIR}/${PV}"
+)
+
 src_prepare() {
 	pushd ../.. &>/dev/null || die
 
 	use lto && rm -v "${WORKDIR}"/firefox-patches/*-LTO-Only-enable-LTO-*.patch
 
 	eapply "${WORKDIR}"/firefox-patches
-	eapply "${WORKDIR}"/spidermonkey-patches
+	#eapply "${WORKDIR}"/spidermonkey-patches
 
 	default
 
