@@ -1,4 +1,4 @@
-DEFINED_PHASES=install nofetch postinst postrm preinst pretend setup unpack
+DEFINED_PHASES=install nofetch postinst postrm pretend setup unpack
 DESCRIPTION=The web browser from Google (dev channel)
 EAPI=7
 HOMEPAGE=https://www.google.com/chrome
@@ -10,4 +10,4 @@ RESTRICT=bindist strip
 SLOT=0
 SRC_URI=https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-unstable/google-chrome-unstable_142.0.7432.0-1_amd64.deb -> google-chrome-unstable_142.0.7432.0-1_amd64.deb
 _eclasses_=chromium-2	92ff174aa2b13d6ea0c4539533f0b2de	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	gnome2-utils	532371cfcba45b2ab0d2950547c97d95	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multilib	d410501a125f99ffb560b0c523cd3d1e	pax-utils	db85a3c508cf82c45f24b2723791cc93	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	unpacker	cbd6624f820a4289653f5dcb999bea7a	xdg-utils	14d00d009167652b1fa363e55effe213
-_md5_=c47bea87fd8b85350d4a4ca8627f239d
+_md5_=337d6cab8853ef730a7bf8595d2556ab

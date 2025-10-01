@@ -84,7 +84,7 @@ src_install() {
 	cd "${ED}" || die
 	unpacker
 
-	rm -r etc usr/share/menu || die
+	rm -r etc || die
 	mv usr/share/doc/${MY_PN} usr/share/doc/${PF} || die
 
 	gzip -d usr/share/doc/${PF}/changelog.gz || die
@@ -107,10 +107,6 @@ src_install() {
 	done
 
 	pax-mark m "${CHROME_HOME}/chrome"
-}
-
-pkg_preinst() {
-	xdg_icon_savelist
 }
 
 pkg_postrm() {
