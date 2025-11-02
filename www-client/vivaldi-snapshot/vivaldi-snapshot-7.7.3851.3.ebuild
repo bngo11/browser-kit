@@ -14,14 +14,15 @@ MY_PN=${PN}
 DESCRIPTION="A browser for our friends"
 HOMEPAGE="https://vivaldi.com/"
 SRC_URI="
-	amd64? ( https://downloads.vivaldi.com/snapshot/vivaldi-snapshot_7.7.3847.3-1_amd64.deb -> vivaldi-snapshot_7.7.3847.3-1_amd64.deb )
+	amd64? ( https://downloads.vivaldi.com/snapshot/vivaldi-snapshot_7.7.3851.3-1_amd64.deb -> vivaldi-snapshot_7.7.3851.3-1_amd64.deb )
+	arm64? ( https://downloads.vivaldi.com/snapshot/vivaldi-snapshot_7.7.3851.3-1_arm64.deb -> vivaldi-snapshot_7.7.3851.3-1_arm64.deb )
 "
 
 IUSE="widevine"
 
 LICENSE="Vivaldi"
 SLOT="0"
-KEYWORDS="-* ~amd64"
+KEYWORDS="-* ~amd64 ~arm64"
 RESTRICT="bindist"
 
 DEPEND="virtual/libiconv"
