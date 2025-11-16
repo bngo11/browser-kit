@@ -42,7 +42,6 @@ def get_artifacts(hub, name, version, url_path, channel):
 	# Lookup mozilla arch strings using the Funtoo arch strings
 	moz = {
 		"amd64": "x86_64",
-		"x86": "i686",
 	}
 
 	# Construct the upstream url and transform the upstream version to a portage friendly version
