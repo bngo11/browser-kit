@@ -6,7 +6,7 @@ EAPI="7"
 FIREFOX_PATCHSET="firefox-140esr-patches-01.tar.xz"
 SPIDERMONKEY_PATCHSET="spidermonkey-140-patches-01.tar.xz"
 
-LLVM_MAX_SLOT=18
+LLVM_MAX_SLOT=21
 
 PYTHON_COMPAT=( python3+ )
 PYTHON_REQ_USE="ssl,xml(+)"
@@ -76,21 +76,10 @@ BDEPEND="${PYTHON_DEPS}
 	test? (
 		$(python_gen_any_dep 'dev-python/six[${PYTHON_USEDEP}]')
 	)
-	|| (
-		(
-			sys-devel/llvm:14
-			clang? (
-				sys-devel/clang:14
-				lto? ( =sys-devel/lld-14* )
-			)
-		)
-		(
-			sys-devel/llvm:18
-			clang? (
-				sys-devel/clang:18
-				lto? ( =sys-devel/lld-18* )
-			)
-		)
+	sys-devel/llvm
+	clang? (
+		sys-devel/clang
+		lto? ( sys-devel/lld )
 	)"
 DEPEND=">=dev-libs/icu-71.1:=
 	dev-libs/nspr
