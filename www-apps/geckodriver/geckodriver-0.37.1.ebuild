@@ -1,0 +1,22 @@
+# Distributed under the terms of the GNU General Public License v2
+
+EAPI=7
+
+inherit cargo
+
+DESCRIPTION="Proxy for using W3C WebDriver compatible clients to interact with Gecko-based browsers."
+HOMEPAGE="https://hg.mozilla.org/mozilla-central/file/tip/testing/geckodriver https://github.com/mozilla/geckodriver"
+SRC_URI="https://github.com/mozilla/geckodriver/tarball/3ae7e7879ac7eb3ee6c3bde6c63959b874948d9a -> geckodriver-0.37.1-3ae7e78.tar.gz
+https://direct.funtoo.org/bf/0a/55/bf0a55b921c8d6f1bc72b8c2a348e859f67f971ed273b7eeeb619ac8e7a837dee951f616396b48f0408447221783642a9283e0be98ac45956c60bb3591a1275f -> geckodriver-0.37.1-funtoo-crates-bundle-2276c5dddecd09e50fcbeeb1a660156982bcabcfa60b32621175fb36a976ba92c7b37f48527adecbb8807b4ecf00c21430040efb01086dc48497f1b4de94668b.tar.gz"
+
+LICENSE="MPL-2.0"
+SLOT="0"
+KEYWORDS="*"
+
+DOCS=( README.md )
+
+src_unpack() {
+	cargo_src_unpack
+	rm -rf ${S}
+	mv ${WORKDIR}/mozilla-geckodriver-* ${S} || die
+}
