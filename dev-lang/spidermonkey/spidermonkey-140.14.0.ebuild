@@ -3,17 +3,17 @@
 EAPI="7"
 
 # Patch version
-FIREFOX_PATCHSET="firefox-140esr-patches-01.tar.xz"
-SPIDERMONKEY_PATCHSET="spidermonkey-140-patches-01.tar.xz"
+FIREFOX_PATCHSET="firefox-140esr-patches-13.tar.xz"
+SPIDERMONKEY_PATCHSET="spidermonkey-140-patches-02.tar.xz"
 
-LLVM_MAX_SLOT=21
+LLVM_MAX_SLOT=22
 
 PYTHON_COMPAT=( python3+ )
 PYTHON_REQ_USE="ssl,xml(+)"
 
 WANT_AUTOCONF="latest"
 
-inherit autotools check-reqs flag-o-matic llvm multiprocessing prefix python-any-r1 toolchain-funcs
+inherit check-reqs flag-o-matic llvm multiprocessing prefix python-any-r1 toolchain-funcs
 
 MY_PN="mozjs"
 MY_PV="${PV/_pre*}" # Handle Gentoo pre-releases
@@ -178,7 +178,7 @@ pkg_setup() {
 }
 
 PATCHES=(
-	"${FILESDIR}/${PV}"
+#	"${FILESDIR}/${PV}"
 )
 
 src_prepare() {
@@ -256,15 +256,17 @@ src_configure() {
 
 	# ../python/mach/mach/mixin/process.py fails to detect SHELL
 	export SHELL="${EPREFIX}/bin/bash"
+	export CBUILD=
 
 	local -a myeconfargs=(
+		--prefix="${EPREFIX}/usr"
+		--libdir="${EPREFIX}/usr/$(get_libdir)"
 		--host="${CBUILD:-${CHOST}}"
 		--target="${CHOST}"
 
-		--disable-ctype
+		--disable-ctypes
 		--disable-jemalloc
 		--disable-optimize
-		--disable-smoosh
 		--disable-strip
 
 		--enable-readline
@@ -326,7 +328,7 @@ src_configure() {
 	# Forcing system-icu allows us to skip patching bundled ICU for PPC
 	# and other minor arches
 	ECONF_SOURCE="${S}" \
-		econf \
+		${S}/configure \
 		${myeconfargs[@]} \
 		XARGS="${EPREFIX}/usr/bin/xargs"
 }
