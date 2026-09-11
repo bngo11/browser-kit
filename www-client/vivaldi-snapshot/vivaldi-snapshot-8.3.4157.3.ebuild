@@ -10,20 +10,20 @@ CHROMIUM_LANGS="
 inherit chromium-2 multilib unpacker toolchain-funcs xdg-utils
 
 VIVALDI_HOME="opt/${PN}"
-MY_PN=${PN}-stable
+MY_PN=${PN}
 DESCRIPTION="A browser for our friends"
 HOMEPAGE="https://vivaldi.com/"
 SRC_URI="
-	amd64? ( https://downloads.vivaldi.com/stable/vivaldi-stable_8.1.4087.75-1_amd64.deb -> vivaldi-stable_8.1.4087.75-1_amd64.deb )
-	arm64? ( https://downloads.vivaldi.com/stable/vivaldi-stable_8.1.4087.75-1_arm64.deb -> vivaldi-stable_8.1.4087.75-1_arm64.deb )
+	amd64? ( https://downloads.vivaldi.com/snapshot/vivaldi-snapshot_8.3.4157.3-1_amd64.deb -> vivaldi-snapshot_8.3.4157.3-1_amd64.deb )
+	arm64? ( https://downloads.vivaldi.com/snapshot/vivaldi-snapshot_8.3.4157.3-1_arm64.deb -> vivaldi-snapshot_8.3.4157.3-1_arm64.deb )
 "
 
 IUSE="widevine"
 
 LICENSE="Vivaldi"
 SLOT="0"
-KEYWORDS="-* amd64 arm64"
-
+KEYWORDS="-* ~amd64 ~arm64"
+RESTRICT="bindist"
 
 DEPEND="virtual/libiconv"
 RDEPEND="
